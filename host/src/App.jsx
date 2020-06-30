@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import CoolButton from "remote/CoolButton";
+import FlightsList from "./FlightsList";
 
-ReactDOM.render(
+const App = () => (
   <div>
     <h1>Host page</h1>
     <CoolButton />
-  </div>,
-  document.getElementById("app-root")
+    <FlightsList />
+  </div>
 );
+
+ReactDOM.render(<App />, document.getElementById("app-root"));
