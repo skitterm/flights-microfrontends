@@ -52,13 +52,13 @@ const flights = [
       airport: "SLC",
       terminal: 5,
       gate: 33,
-      time: 1593558460223,
+      time: 1595558460223,
     },
     arrival: {
       airport: "JFK",
       terminal: 3,
       gate: 14,
-      time: 1593658460223,
+      time: 1595658460223,
     },
     aircraft: {
       make: "boeing",
