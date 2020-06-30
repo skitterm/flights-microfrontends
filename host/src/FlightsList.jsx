@@ -3,7 +3,7 @@ import React from "react";
 const flights = [
   {
     id: "a",
-    airline: "american",
+    airline: "American",
     number: "355",
     departure: {
       airport: "LAX",
@@ -24,7 +24,7 @@ const flights = [
   },
   {
     id: "b",
-    airline: "delta",
+    airline: "Delta",
     number: "23",
     departure: {
       airport: "DCA",
@@ -45,7 +45,7 @@ const flights = [
   },
   {
     id: "c",
-    airline: "southwest",
+    airline: "Southwest",
     number: "86",
     departure: {
       airport: "SLC",
@@ -72,9 +72,27 @@ export default () => {
       {flights.map((flight) => {
         return (
           <li key={flight.id}>
-            <h4>
+            <h3>
               {flight.departure.airport} - {flight.arrival.airport}
-            </h4>
+            </h3>
+            <h5>
+              {flight.airline} {flight.number}
+            </h5>
+            <div>
+              <h4>Departure -- {flight.departure.airport}</h4>
+              <h5>
+                {new Date(flight.departure.time).toLocaleString("en-us", {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </h5>
+              <span>
+                Terminal {flight.departure.terminal}, Gate{" "}
+                {flight.departure.gate}
+              </span>
+            </div>
           </li>
         );
       })}
