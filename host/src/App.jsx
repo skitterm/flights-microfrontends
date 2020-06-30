@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CoolButton from "remote/CoolButton";
+import Header from "remote/Header";
 import FlightsList from "./FlightsList";
 
 const App = () => (
   <div>
-    <h1>Host page</h1>
-    <CoolButton />
+    <Header />
+    <h1>My Flights</h1>
     <FlightsList />
   </div>
 );

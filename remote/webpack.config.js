@@ -32,7 +32,7 @@ module.exports = {
       },
       filename: "remoteEntry.js",
       exposes: {
-        "./CoolButton": "./src/CoolButton",
+        "./Header": "./src/Header",
       },
       shared: ["react", "react-dom"],
     }),

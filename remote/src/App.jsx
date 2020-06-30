@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CoolButton from "./CoolButton";
+import Header from "./Header";
 
-ReactDOM.render(<CoolButton />, document.getElementById("app-root"));
+ReactDOM.render(<Header />, document.getElementById("app-root"));
