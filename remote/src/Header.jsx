@@ -11,7 +11,7 @@ export default () => {
         padding: "16px 32px",
       }}
     >
-      Site header
+      Flight Booking
     </header>
   );
 };

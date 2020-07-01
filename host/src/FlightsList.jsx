@@ -1,5 +1,5 @@
 import React from "react";
-import FlightPoint from "./FlightPoint";
+import FlightItem from "./FlightItem";
 
 const flights = [
   {
@@ -69,20 +69,16 @@ const flights = [
 
 export default () => {
   return (
-    <ul>
+    <ul
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        listStyleType: "none",
+        gap: "16px",
+      }}
+    >
       {flights.map((flight) => {
-        return (
-          <li key={flight.id}>
-            <h3>
-              {flight.departure.airport} - {flight.arrival.airport}
-            </h3>
-            <h5>
-              {flight.airline} {flight.number}
-            </h5>
-            <FlightPoint {...flight.departure} isArrival={false} />
-            <FlightPoint {...flight.arrival} isArrival={true} />
-          </li>
-        );
+        return <FlightItem {...flight} />;
       })}
     </ul>
   );

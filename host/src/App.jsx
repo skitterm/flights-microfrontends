@@ -6,8 +6,15 @@ import FlightsList from "./FlightsList";
 const App = () => (
   <div>
     <Header />
-    <h1>My Flights</h1>
-    <FlightsList />
+    <div
+      style={{
+        margin: "auto",
+        maxWidth: "900px",
+      }}
+    >
+      <h1>My Flights</h1>
+      <FlightsList />
+    </div>
   </div>
 );
 
