@@ -2,15 +2,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
-  mode: "development",
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: "http://localhost:3001/",
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
   },
   devServer: {
-    port: 3000,
+    port: 3001,
   },
   module: {
     rules: [
@@ -25,14 +24,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "host",
+      name: "remote",
       library: {
         type: "var",
-        name: "host",
+        name: "remote",
       },
       filename: "remoteEntry.js",
-      remotes: {
-        remote: "remote",
+      exposes: {
+        "./Header": "./src/Header",
       },
       shared: ["react", "react-dom"],
     }),
