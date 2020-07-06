@@ -1,6 +1,11 @@
 <html>
   <head>
-    <script src="http://localhost:3001/remoteEntry.js"></script>
+    <script>
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "http://localhost:3001/remoteEntry.js";
+      document.head.appendChild(script);
+    </script>
     <style>
       html,
       body {
