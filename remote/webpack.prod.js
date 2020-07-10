@@ -4,9 +4,6 @@ const common = require("./webpack.common");
 module.exports = merge(common, {
   mode: "production",
   output: {
-    publicPath: "http://localhost:9001/",
-  },
-  devServer: {
-    port: 9001,
+    publicPath: "http://18.219.3.164:32779/",
   },
 });
