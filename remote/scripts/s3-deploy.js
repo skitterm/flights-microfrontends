@@ -13,7 +13,10 @@
  */
 
 /**
- * Modified by Steven Kitterman to specify the region
+ * Modified by Steven Kitterman (July 2020) to:
+ *  - specify the region
+ *  - Allow uploading multiple files
+ *  - Allow uploading nested directories
  */
 
 //snippet-sourcedescription:[s3_upload.js demonstrates how to upload an arbitrarily-sized stream to an Amazon S3 bucket.]
@@ -30,6 +33,7 @@
 // https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-creating-buckets.html
 
 // snippet-start:[s3.JavaScript.buckets.upload]
+var fs = require("fs");
 // Load the AWS SDK for Node.js
 var AWS = require("aws-sdk");
 // Set the region
@@ -38,27 +42,53 @@ AWS.config.update({ region: "us-east-2" });
 // Create S3 service object
 s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
-// call S3 to retrieve upload file to specified bucket
-var uploadParams = { Bucket: process.argv[2], Key: "", Body: "" };
-var file = process.argv[3];
+const uploadFile = (file) => {
+  // call S3 to retrieve upload file to specified bucket
+  var uploadParams = { Bucket: process.argv[2], Key: "", Body: "" };
 
-// Configure the file stream and obtain the upload parameters
-var fs = require("fs");
-var fileStream = fs.createReadStream(file);
-fileStream.on("error", function (err) {
-  console.log("File Error", err);
-});
-uploadParams.Body = fileStream;
-var path = require("path");
-uploadParams.Key = path.basename(file);
+  // Configure the file stream and obtain the upload parameters
+  var fileStream = fs.createReadStream(file);
+  fileStream.on("error", function (err) {
+    console.log("File Error", err);
+  });
+  uploadParams.Body = fileStream;
+  var path = require("path");
+  const separator = "/";
+  const pieces = file.split(separator);
+  const allButBase = pieces.slice(1);
+  uploadParams.Key = allButBase.join(separator);
 
-// call S3 to retrieve upload file to specified bucket
-s3.upload(uploadParams, function (err, data) {
-  if (err) {
-    console.log("Error", err);
-  }
-  if (data) {
-    console.log("Upload Success", data.Location);
-  }
-});
-// snippet-end:[s3.JavaScript.buckets.upload]
+  // call S3 to retrieve upload file to specified bucket
+  s3.upload(uploadParams, function (err, data) {
+    if (err) {
+      console.log("Error", err);
+    }
+    if (data) {
+      console.log("Upload Success", data.Location);
+    }
+  });
+};
+
+const uploadFiles = (path) => {
+  fs.readdir(path, (error, files) => {
+    if (error) {
+      console.error(error);
+    } else {
+      files.forEach((file) => {
+        const fullPath = `${path}/${file}`;
+        fs.lstat(fullPath, (error, stats) => {
+          if (error) {
+            console.error(error);
+          } else if (stats.isDirectory()) {
+            uploadFiles(fullPath);
+          } else {
+            uploadFile(fullPath);
+          }
+        });
+      });
+    }
+  });
+};
+
+const path = process.argv[3];
+uploadFiles(path);
