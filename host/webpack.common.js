@@ -27,7 +27,7 @@ module.exports = {
       remotes: {
         remote: "remote",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "styled-components"],
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",

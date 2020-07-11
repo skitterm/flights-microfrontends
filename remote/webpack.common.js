@@ -33,7 +33,7 @@ module.exports = {
       exposes: {
         "./Header": "./src/Header",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "styled-components"],
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",

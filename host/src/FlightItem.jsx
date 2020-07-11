@@ -1,26 +1,31 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import FlightPoint from "./FlightPoint";
+
+const ListItem = styled.li`
+  border-radius: 3px;
+  border: 2px solid #ddd;
+  overflow: hidden;
+  height: 300px;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Thumbnail = styled.div`
+  flex: 0 0 150px;
+  background-color: #ddd;
+`;
 
 export default (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
   return (
-    <li
-      key={props.id}
-      style={{
-        borderRadius: "3px",
-        border: "2px solid #ddd",
-        overflow: "hidden",
-        height: "300px",
-      }}
-    >
+    <ListItem>
       {!isFlipped ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ flex: "0 0 150px", backgroundColor: "#ddd" }}></div>
+        <FlexContainer>
+          <Thumbnail />
           <div style={{ flex: "1 1 auto", padding: "16px" }}>
             <h3 style={{ marginTop: "4px" }}>
               {props.departure.airport} - {props.arrival.airport}
@@ -44,7 +49,7 @@ export default (props) => {
               More info
             </button>
           </div>
-        </div>
+        </FlexContainer>
       ) : (
         <div style={{ padding: "16px" }}>
           <FlightPoint {...props.departure} isArrival={false} />
@@ -58,6 +63,6 @@ export default (props) => {
           </button>
         </div>
       )}
-    </li>
+    </ListItem>
   );
 };

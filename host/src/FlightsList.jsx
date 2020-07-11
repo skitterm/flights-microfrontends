@@ -78,7 +78,7 @@ export default () => {
       }}
     >
       {flights.map((flight) => {
-        return <FlightItem {...flight} />;
+        return <FlightItem key={flight.id} {...flight} />;
       })}
     </ul>
   );
