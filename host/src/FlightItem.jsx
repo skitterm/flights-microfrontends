@@ -19,6 +19,23 @@ const Thumbnail = styled.div`
   background-color: #ddd;
 `;
 
+const Bottom = styled.div`
+  flex: 1 1 auto;
+  padding: 16px;
+`;
+
+const Title = styled.h3`
+  margin-top: 4px;
+`;
+
+const SmallText = styled.h5`
+  margin: 8px 0;
+`;
+
+const BackfaceWrapper = styled.div`
+  padding: 16px;
+`;
+
 export default (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
   return (
@@ -26,21 +43,21 @@ export default (props) => {
       {!isFlipped ? (
         <FlexContainer>
           <Thumbnail />
-          <div style={{ flex: "1 1 auto", padding: "16px" }}>
-            <h3 style={{ marginTop: "4px" }}>
+          <Bottom>
+            <Title>
               {props.departure.airport} - {props.arrival.airport}
-            </h3>
-            <h5 style={{ margin: "8px 0" }}>
+            </Title>
+            <SmallText>
               {new Date(props.departure.time).toLocaleString("en-us", {
                 month: "short",
                 day: "numeric",
                 hour: "numeric",
                 minute: "numeric",
               })}
-            </h5>
-            <h5 style={{ margin: "8px 0" }}>
+            </SmallText>
+            <SmallText>
               {props.airline} {props.number}
-            </h5>
+            </SmallText>
             <button
               onClick={() => {
                 setIsFlipped(!isFlipped);
@@ -48,10 +65,10 @@ export default (props) => {
             >
               More info
             </button>
-          </div>
+          </Bottom>
         </FlexContainer>
       ) : (
-        <div style={{ padding: "16px" }}>
+        <BackfaceWrapper>
           <FlightPoint {...props.departure} isArrival={false} />
           <FlightPoint {...props.arrival} isArrival={true} />
           <button
@@ -61,7 +78,7 @@ export default (props) => {
           >
             Back
           </button>
-        </div>
+        </BackfaceWrapper>
       )}
     </ListItem>
   );

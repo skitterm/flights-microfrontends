@@ -1,6 +1,12 @@
 import React, { useState, Suspense } from "react";
 import ReactDOM from "react-dom";
+import styled from "styled-components";
 import FlightsList from "./FlightsList";
+
+const Main = styled.div`
+  margin: auto;
+  max-width: 900px;
+`;
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
@@ -30,15 +36,10 @@ const App = () => {
     <Suspense fallback="Falling back">
       <div>
         <Header />
-        <div
-          style={{
-            margin: "auto",
-            maxWidth: "900px",
-          }}
-        >
+        <Main>
           <h1>My Flights</h1>
           <FlightsList />
-        </div>
+        </Main>
       </div>
     </Suspense>
   );

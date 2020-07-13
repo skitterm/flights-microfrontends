@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import FlightItem from "./FlightItem";
 
 const flights = [
@@ -67,19 +68,19 @@ const flights = [
   },
 ];
 
+const List = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style-type: none;
+  gap: 16px;
+`;
+
 export default () => {
   return (
-    <ul
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        listStyleType: "none",
-        gap: "16px",
-      }}
-    >
+    <List>
       {flights.map((flight) => {
         return <FlightItem key={flight.id} {...flight} />;
       })}
-    </ul>
+    </List>
   );
 };
