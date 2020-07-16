@@ -1,5 +1,5 @@
 node_modules
-host/node_modules
-remote/node_modules
-host/dist
-remote/dist
+shell/node_modules
+header/node_modules
+shell/dist
+header/dist
