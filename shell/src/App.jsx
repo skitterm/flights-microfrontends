@@ -26,7 +26,7 @@ const App = () => {
 
   // dynamic loading code from https://github.com/jherr/getting-started-mf-0615/blob/master/dashboard/src/App.jsx
   const Header = React.lazy(() =>
-    window["remote"].get("./Header").then((factory) => {
+    window["header"].get("./Header").then((factory) => {
       const module = factory();
       return module;
     })

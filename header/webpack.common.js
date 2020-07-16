@@ -24,10 +24,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "remote",
+      name: "header",
       library: {
         type: "var",
-        name: "remote",
+        name: "header",
       },
       filename: "remoteEntry.js",
       exposes: {

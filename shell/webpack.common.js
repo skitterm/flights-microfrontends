@@ -18,14 +18,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "host",
+      name: "shell",
       library: {
         type: "var",
-        name: "host",
+        name: "shell",
       },
       filename: "remoteEntry.js",
       remotes: {
-        remote: "remote",
+        header: "header",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),
