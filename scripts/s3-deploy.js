@@ -44,7 +44,12 @@ s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 const uploadFile = (file) => {
   // call S3 to retrieve upload file to specified bucket
-  var uploadParams = { Bucket: process.argv[2], Key: "", Body: "" };
+  var uploadParams = {
+    Bucket: process.argv[2],
+    Key: "",
+    Body: "",
+    ContentType: file.includes(".html") ? "text/html" : undefined,
+  };
 
   // Configure the file stream and obtain the upload parameters
   var fileStream = fs.createReadStream(file);

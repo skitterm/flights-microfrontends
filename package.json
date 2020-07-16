@@ -1,0 +1,21 @@
+{
+  "name": "flights-microfrontends",
+  "version": "1.0.0",
+  "description": "A proof-of-concept for microfrontends for the flight booking application. This demonstrates that two different bundles (`host` and `remote`) can be used together but deployed separately.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skitterm/flights-microfrontends.git"
+  },
+  "author": "Steven Kitterman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skitterm/flights-microfrontends/issues"
+  },
+  "homepage": "https://github.com/skitterm/flights-microfrontends#readme",
+  "dependencies": {
+    "aws-sdk": "^2.714.1"
+  }
+}
