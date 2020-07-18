@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 // loadComponent comes from module-federation-examples repo:
@@ -63,7 +63,12 @@ const App = () => {
     <Suspense fallback="Falling back">
       <HashRouter>
         <div>
-          <Header />
+          <Header
+            links={[
+              <NavLink to="/">View Flights</NavLink>,
+              <NavLink to="/search">Search</NavLink>,
+            ]}
+          ></Header>
           <Main>
             <Switch>
               <Route path="/search">
