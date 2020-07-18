@@ -25,6 +25,7 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "servor": "^4.0.2",
     "styled-components": "4.3.2"
   }

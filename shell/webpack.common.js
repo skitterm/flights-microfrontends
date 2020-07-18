@@ -28,6 +28,7 @@ module.exports = {
       remotes: {
         header: "header",
         viewFlights: "viewFlights",
+        searchFlights: "searchFlights",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),

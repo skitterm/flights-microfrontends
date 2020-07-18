@@ -1,5 +1,6 @@
 import React, { useState, Suspense } from "react";
 import ReactDOM from "react-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 // loadComponent comes from module-federation-examples repo:
@@ -18,6 +19,15 @@ function loadComponent(scope, module) {
   };
 }
 
+function loadScript(url, callback) {
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = `${url}/remoteEntry.js`;
+  document.head.appendChild(script);
+
+  script.onload = callback;
+}
+
 const Main = styled.div`
   margin: auto;
   max-width: 900px;
@@ -25,26 +35,14 @@ const Main = styled.div`
 
 const App = () => {
   const [isHeaderReady, setIsHeaderReady] = useState(false);
-
-  const script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = `${HEADER_URL}/remoteEntry.js`;
-  document.head.appendChild(script);
-
-  script.onload = () => {
+  loadScript(HEADER_URL, () => {
     setIsHeaderReady(true);
-  };
+  });
 
   const [isViewFlightsReady, setIsViewFlightsReady] = useState(false);
-
-  const script2 = document.createElement("script");
-  script2.type = "text/javascript";
-  script2.src = `${VIEW_FLIGHTS_URL}/remoteEntry.js`;
-  document.head.appendChild(script2);
-
-  script2.onload = () => {
+  loadScript(VIEW_FLIGHTS_URL, () => {
     setIsViewFlightsReady(true);
-  };
+  });
 
   if (!isHeaderReady || !isViewFlightsReady) {
     return <h1>Loading</h1>;
@@ -55,12 +53,19 @@ const App = () => {
 
   return (
     <Suspense fallback="Falling back">
-      <div>
-        <Header />
-        <Main>
-          <ViewFlights />
-        </Main>
-      </div>
+      <HashRouter>
+        <div>
+          <Header />
+          <Main>
+            <Switch>
+              <Route path="/search">Searching now...</Route>
+              <Route path="/">
+                <ViewFlights />
+              </Route>
+            </Switch>
+          </Main>
+        </div>
+      </HashRouter>
     </Suspense>
   );
 };

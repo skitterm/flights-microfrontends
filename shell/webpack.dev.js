@@ -14,6 +14,7 @@ module.exports = merge(common, {
     new DefinePlugin({
       HEADER_URL: JSON.stringify("http://localhost:3001"),
       VIEW_FLIGHTS_URL: JSON.stringify("http://localhost:3002"),
+      SEARCH_FLIGHTS_URL: JSON.stringify("http://localhost:3003"),
     }),
   ],
 });

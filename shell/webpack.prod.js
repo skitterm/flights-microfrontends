@@ -12,6 +12,7 @@ module.exports = merge(common, {
     new DefinePlugin({
       HEADER_URL: JSON.stringify("http://18.219.3.164:32781"),
       VIEW_FLIGHTS_URL: JSON.stringify("http://18.219.3.164:32780"),
+      SEARCH_FLIGHTS_URL: JSON.stringify("http://18.219.3.164:32782"),
     }),
   ],
 });
