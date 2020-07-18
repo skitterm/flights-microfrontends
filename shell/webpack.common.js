@@ -26,6 +26,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         header: "header",
+        viewFlights: "viewFlights",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),

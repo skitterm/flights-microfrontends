@@ -18,14 +18,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "header",
+      name: "viewFlights",
       library: {
         type: "var",
-        name: "header",
+        name: "viewFlights",
       },
       filename: "remoteEntry.js",
       exposes: {
-        "./Header": "./src/Header",
+        "./ViewFlights": "./src/ViewFlights",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),

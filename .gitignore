@@ -1,5 +1,7 @@
 node_modules
 shell/node_modules
 header/node_modules
+viewFlights/node_modules
 shell/dist
 header/dist
+viewFlights/dist

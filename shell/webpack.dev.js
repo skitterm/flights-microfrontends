@@ -12,7 +12,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new DefinePlugin({
-      REMOTE_URL: JSON.stringify("http://localhost:3001"),
+      HEADER_URL: JSON.stringify("http://localhost:3001"),
+      VIEW_FLIGHTS_URL: JSON.stringify("http://localhost:3002"),
     }),
   ],
 });

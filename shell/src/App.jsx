@@ -1,7 +1,6 @@
 import React, { useState, Suspense } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import FlightsList from "./FlightsList";
 
 const Main = styled.div`
   margin: auto;
@@ -9,18 +8,29 @@ const Main = styled.div`
 `;
 
 const App = () => {
-  const [isReady, setIsReady] = useState(false);
+  const [isHeaderReady, setIsHeaderReady] = useState(false);
 
   const script = document.createElement("script");
   script.type = "text/javascript";
-  script.src = `${REMOTE_URL}/remoteEntry.js`;
+  script.src = `${HEADER_URL}/remoteEntry.js`;
   document.head.appendChild(script);
 
   script.onload = () => {
-    setIsReady(true);
+    setIsHeaderReady(true);
   };
 
-  if (!isReady) {
+  const [isViewFlightsReady, setIsViewFlightsReady] = useState(true);
+
+  // const script2 = document.createElement("script");
+  // script2.type = "text/javascript";
+  // script2.src = `${VIEW_FLIGHTS_URL}/remoteEntry.js`;
+  // document.head.appendChild(script2);
+
+  // script2.onload = () => {
+  //   setIsViewFlightsReady(true);
+  // };
+
+  if (!isHeaderReady || !isViewFlightsReady) {
     return <h1>Loading</h1>;
   }
 
@@ -32,14 +42,18 @@ const App = () => {
     })
   );
 
+  // const ViewFlights = React.lazy(() =>
+  //   window["viewFlights"].get("./ViewFlights").then((factory) => {
+  //     const module = factory();
+  //     return module;
+  //   })
+  // );
+
   return (
     <Suspense fallback="Falling back">
       <div>
         <Header />
-        <Main>
-          <h1>My Flights</h1>
-          <FlightsList />
-        </Main>
+        <Main>{/* <ViewFlights /> */}</Main>
       </div>
     </Suspense>
   );
