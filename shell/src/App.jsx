@@ -34,13 +34,23 @@ const App = () => {
     return <h1>Loading</h1>;
   }
 
-  // dynamic loading code from https://github.com/jherr/getting-started-mf-0615/blob/master/dashboard/src/App.jsx
-  const Header = React.lazy(() =>
-    window["header"].get("./Header").then((factory) => {
-      const module = factory();
-      return module;
-    })
-  );
+  const Header = React.lazy(loadComponent("header", "./Header"));
+
+  // loadComponent comes from module-federation-examples repo:
+  // https://github.com/module-federation/module-federation-examples/blob/bae09de0a68327f411f733d0fe84c9534770afab/advanced-api/dynamic-remotes/app1/src/App.js
+  function loadComponent(scope, module) {
+    return async () => {
+      // Initializes the share scope. This fills it with known provided modules from this build and all remotes
+      await __webpack_init_sharing__("default");
+
+      const container = window[scope]; // or get the container somewhere else
+      // Initialize the container, it may provide shared modules
+      await container.init(__webpack_share_scopes__.default);
+      const factory = await window[scope].get(module);
+      const Module = factory();
+      return Module;
+    };
+  }
 
   // const ViewFlights = React.lazy(() =>
   //   window["viewFlights"].get("./ViewFlights").then((factory) => {
