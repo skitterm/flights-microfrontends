@@ -44,12 +44,20 @@ const App = () => {
     setIsViewFlightsReady(true);
   });
 
-  if (!isHeaderReady || !isViewFlightsReady) {
+  const [isSearchFlightsReady, setIsSearchFlightsReady] = useState(false);
+  loadScript(SEARCH_FLIGHTS_URL, () => {
+    setIsSearchFlightsReady(true);
+  });
+
+  if (!isHeaderReady || !isViewFlightsReady || !isSearchFlightsReady) {
     return <h1>Loading</h1>;
   }
 
   const Header = React.lazy(loadComponent("header", "./Header"));
   const ViewFlights = React.lazy(loadComponent("viewFlights", "./ViewFlights"));
+  const SearchFlights = React.lazy(
+    loadComponent("searchFlights", "./SearchFlights")
+  );
 
   return (
     <Suspense fallback="Falling back">
@@ -58,7 +66,9 @@ const App = () => {
           <Header />
           <Main>
             <Switch>
-              <Route path="/search">Searching now...</Route>
+              <Route path="/search">
+                <SearchFlights />
+              </Route>
               <Route path="/">
                 <ViewFlights />
               </Route>

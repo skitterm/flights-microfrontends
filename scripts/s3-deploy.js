@@ -48,7 +48,11 @@ const uploadFile = (file) => {
     Bucket: process.argv[2],
     Key: "",
     Body: "",
-    ContentType: file.includes(".html") ? "text/html" : undefined,
+    ContentType: file.includes(".html")
+      ? "text/html"
+      : file.includes(".js")
+      ? "text/javascript"
+      : undefined,
   };
 
   // Configure the file stream and obtain the upload parameters
