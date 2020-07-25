@@ -22,6 +22,8 @@ const ListItem = styled.li`
 `;
 
 export default (props) => {
+  console.log("TESTING...");
+
   return (
     <Header>
       <span>Flight Booking</span>
