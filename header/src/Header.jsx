@@ -22,15 +22,13 @@ const ListItem = styled.li`
 `;
 
 export default (props) => {
-  console.log("TESTING...");
-
   return (
     <Header>
       <span>Flight Booking</span>
       <nav>
         <List>
-          {props.links.map((link) => (
-            <ListItem>{link}</ListItem>
+          {props.links.map((link, index) => (
+            <ListItem key={index}>{link}</ListItem>
           ))}
         </List>
       </nav>

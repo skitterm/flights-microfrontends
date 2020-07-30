@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Switch, Route, NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -11,12 +11,17 @@ function loadComponent(scope, module) {
     await __webpack_init_sharing__("default");
 
     const container = window[scope]; // or get the container somewhere else
-    // Initialize the container, it may provide shared modules
     await container.init(__webpack_share_scopes__.default);
     const factory = await window[scope].get(module);
     const Module = factory();
     return Module;
   };
+}
+
+async function loadObject(scope, module) {
+  const componentLoader = await loadComponent(scope, module);
+  const objectA = await componentLoader();
+  return objectA.default;
 }
 
 function loadScript(url, callback) {
@@ -49,7 +54,34 @@ const App = () => {
     setIsSearchFlightsReady(true);
   });
 
-  if (!isHeaderReady || !isViewFlightsReady || !isSearchFlightsReady) {
+  const [isDesignSystemReady, setIsDesignSystemReady] = useState(false);
+  if (!isDesignSystemReady) {
+    loadScript(DESIGN_SYSTEM_URL, () => {
+      setIsDesignSystemReady(true);
+    });
+  }
+
+  const [designSystem, setDesignSystem] = useState(undefined);
+
+  useEffect(() => {
+    if (!isDesignSystemReady) {
+      return;
+    }
+
+    const loadDesignSystem = async () => {
+      const designObject = await loadObject("design", "./design");
+      setDesignSystem(designObject);
+    };
+    loadDesignSystem();
+  }, [isDesignSystemReady]);
+
+  if (
+    !isHeaderReady ||
+    !isViewFlightsReady ||
+    !isSearchFlightsReady ||
+    !isDesignSystemReady ||
+    !designSystem
+  ) {
     return <h1>Loading</h1>;
   }
 

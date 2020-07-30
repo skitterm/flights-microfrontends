@@ -15,6 +15,7 @@ module.exports = merge(common, {
       HEADER_URL: JSON.stringify("http://localhost:3001"),
       VIEW_FLIGHTS_URL: JSON.stringify("http://localhost:3002"),
       SEARCH_FLIGHTS_URL: JSON.stringify("http://localhost:3003"),
+      DESIGN_SYSTEM_URL: JSON.stringify("http://localhost:3004"),
     }),
   ],
 });

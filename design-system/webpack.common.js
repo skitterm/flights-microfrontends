@@ -19,17 +19,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "shell",
+      name: "design",
       library: {
         type: "var",
-        name: "shell",
+        name: "design",
       },
       filename: "remoteEntry.js",
-      remotes: {
-        header: "header",
-        viewFlights: "viewFlights",
-        searchFlights: "searchFlights",
-        design: "design",
+      exposes: {
+        "./design": "./src/design",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),

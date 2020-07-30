@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import FlightItem from "./FlightItem";
 
@@ -76,6 +76,20 @@ const List = styled.ul`
 `;
 
 export default () => {
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const response = await fetch("http://18.191.215.81:8090/myflights");
+        const json = await response.json();
+        console.log("response: ", json);
+      } catch (err) {
+        console.log("error: ", err);
+      }
+    };
+
+    fetchFlights();
+  }, []);
+
   return (
     <List>
       {flights.map((flight) => {
