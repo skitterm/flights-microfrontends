@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Button from "design/Button";
 import FlightPoint from "./FlightPoint";
 
 const ListItem = styled.li`
@@ -58,26 +59,26 @@ export default (props) => {
             <SmallText>
               {props.airline} {props.number}
             </SmallText>
-            <button
+            <Button
               onClick={() => {
                 setIsFlipped(!isFlipped);
               }}
             >
               More info
-            </button>
+            </Button>
           </Bottom>
         </FlexContainer>
       ) : (
         <BackfaceWrapper>
           <FlightPoint {...props.departure} isArrival={false} />
           <FlightPoint {...props.arrival} isArrival={true} />
-          <button
+          <Button
             onClick={() => {
               setIsFlipped(!isFlipped);
             }}
           >
             Back
-          </button>
+          </Button>
         </BackfaceWrapper>
       )}
     </ListItem>

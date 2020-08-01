@@ -1,4 +1,3 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
@@ -28,10 +27,10 @@ module.exports = {
       exposes: {
         "./ViewFlights": "./src/ViewFlights",
       },
+      remotes: {
+        design: "design",
+      },
       shared: ["react", "react-dom", "styled-components"],
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
     }),
   ],
 };
