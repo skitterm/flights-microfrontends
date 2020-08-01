@@ -1,6 +1,4 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
-
 module.exports = {
   resolve: {
     extensions: [".jsx", ".js", ".json"],
@@ -28,10 +26,10 @@ module.exports = {
       exposes: {
         "./Header": "./src/Header",
       },
+      remotes: {
+        design: "design",
+      },
       shared: ["react", "react-dom", "styled-components"],
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
     }),
   ],
 };

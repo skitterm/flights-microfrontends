@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import designSystem from "design/design";
 
 const Header = styled.header`
   position: sticky;
   top: 0;
-  background-color: white;
+  background: ${(props) => props.backgroundColor}
+  border-left: 10px solid ${(props) => props.borderColor};
   box-shadow: 0 1px 8px 0px #888;
   padding: 16px 32px;
   display: flex;
@@ -23,7 +25,10 @@ const ListItem = styled.li`
 
 export default (props) => {
   return (
-    <Header>
+    <Header
+      borderColor={designSystem.colors.primary}
+      backgroundColor={designSystem.colors.white}
+    >
       <span>Flight Booking</span>
       <nav>
         <List>
