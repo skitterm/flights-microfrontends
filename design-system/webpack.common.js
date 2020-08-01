@@ -27,6 +27,7 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         "./design": "./src/design",
+        "./Button": "./src/components/Button",
       },
       shared: ["react", "react-dom", "styled-components"],
     }),
