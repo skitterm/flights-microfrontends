@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Switch, Route, NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 // loadComponent comes from module-federation-examples repo:
 // https://github.com/module-federation/module-federation-examples/blob/bae09de0a68327f411f733d0fe84c9534770afab/advanced-api/dynamic-remotes/app1/src/App.js
@@ -91,8 +91,16 @@ const App = () => {
     loadComponent("searchFlights", "./SearchFlights")
   );
 
+  const GlobalStyles = createGlobalStyle`
+    body {
+      color: ${(props) => props.colors.textDark};
+      font-family: Trebuchet MS, sans-serif;
+    }
+  `;
+
   return (
     <Suspense fallback="Falling back">
+      <GlobalStyles {...designSystem} />
       <HashRouter>
         <div>
           <Header
