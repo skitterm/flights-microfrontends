@@ -20,14 +20,36 @@ const App = () => {
     }        
   `;
 
+  const StyledNavLink = styled(NavLink)`
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    color: ${designSystem.colors.textDark};
+    padding: 4px 0;
+
+    &:visited {
+      color: inherit;
+    }
+  `;
+
   return (
     <HashRouter>
       <GlobalStyles {...designSystem} />
       <div>
         <Header
           links={[
-            <NavLink to="/">View Flights</NavLink>,
-            <NavLink to="/search">Search</NavLink>,
+            <StyledNavLink
+              to="/"
+              exact
+              activeStyle={{ borderBottomColor: designSystem.colors.accent }}
+            >
+              View Flights
+            </StyledNavLink>,
+            <StyledNavLink
+              to="/search"
+              activeStyle={{ borderBottomColor: designSystem.colors.accent }}
+            >
+              Search
+            </StyledNavLink>,
           ]}
         ></Header>
         <Main>

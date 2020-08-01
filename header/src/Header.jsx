@@ -26,7 +26,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  margin-right: 15px;
+  margin-right: ${designSystem.spacing.md};
 `;
 
 export default (props) => {
