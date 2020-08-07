@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "design/Button";
+import designSystem from "design/design";
 import FlightPoint from "./FlightPoint";
 
 const ListItem = styled.li`
@@ -26,6 +27,7 @@ const Bottom = styled.div`
 `;
 
 const Title = styled.h3`
+  font-size: ${designSystem.fontSize.lg};
   margin-top: 4px;
 `;
 
