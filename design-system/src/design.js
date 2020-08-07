@@ -4,7 +4,7 @@ export default {
     white: "#fff",
     textDark: "#333",
     primary: "#0be880",
-    accent: "#0e51bb",
+    accent: "#FFF000",
   },
   fontSize: {
     sm: "12px",
