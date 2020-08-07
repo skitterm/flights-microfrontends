@@ -1,13 +1,19 @@
 import React from "react";
 
 export default (props) => {
+  const truncateAirport = (airportName) => {
+    const pieces = airportName.split(":");
+    return pieces[0] || airportName;
+  };
+
   return (
     <div>
       <h4>
-        {props.isArrival ? "Arrival" : "Departure"} -- {props.airport}
+        {props.isArrival ? "Arrival" : "Departure"} --{" "}
+        {truncateAirport(props.airport)}
       </h4>
       <h5>
-        {new Date(props.time).toLocaleString("en-us", {
+        {new Date(props.date).toLocaleString("en-us", {
           month: "short",
           day: "numeric",
           hour: "numeric",

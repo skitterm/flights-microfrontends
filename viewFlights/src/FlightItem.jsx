@@ -39,6 +39,12 @@ const BackfaceWrapper = styled.div`
 
 export default (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const prettifyAirport = (airportName) => {
+    const pieces = airportName.split(":");
+    return pieces[1] || airportName;
+  };
+
   return (
     <ListItem>
       {!isFlipped ? (
@@ -46,19 +52,18 @@ export default (props) => {
           <Thumbnail />
           <Bottom>
             <Title>
-              {props.departure.airport} - {props.arrival.airport}
+              {prettifyAirport(props.departure_airport)} -{" "}
+              {prettifyAirport(props.arrival_airport)}
             </Title>
             <SmallText>
-              {new Date(props.departure.time).toLocaleString("en-us", {
+              {new Date(props.departure_date).toLocaleString("en-us", {
                 month: "short",
                 day: "numeric",
                 hour: "numeric",
                 minute: "numeric",
               })}
             </SmallText>
-            <SmallText>
-              {props.airline} {props.number}
-            </SmallText>
+            <SmallText>{props.flight_number}</SmallText>
             <Button
               onClick={() => {
                 setIsFlipped(!isFlipped);
@@ -70,8 +75,20 @@ export default (props) => {
         </FlexContainer>
       ) : (
         <BackfaceWrapper>
-          <FlightPoint {...props.departure} isArrival={false} />
-          <FlightPoint {...props.arrival} isArrival={true} />
+          <FlightPoint
+            airport={props.departure_airport}
+            terminal={props.departure_terminal}
+            gate={props.departure_gate}
+            date={props.departure_date}
+            isArrival={false}
+          />
+          <FlightPoint
+            airport={props.arrival_airport}
+            terminal={props.arrival_terminal}
+            gate={props.arrival_gate}
+            date={props.arrival_date}
+            isArrival={true}
+          />
           <Button
             onClick={() => {
               setIsFlipped(!isFlipped);
