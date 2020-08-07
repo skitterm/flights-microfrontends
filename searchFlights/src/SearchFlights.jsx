@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import designSystem from "design/design";
 import FlightItem from "./FightItem";
+import LoadingIndicator from "./LoadingIndicator";
 
 const Heading = styled.h1`
   font-size: ${designSystem.fontSize.display};
@@ -16,6 +17,7 @@ const List = styled.ul`
 
 export default () => {
   const [flights, setFlights] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -26,9 +28,10 @@ export default () => {
         );
         const json = await response.json();
         setFlights(json);
-        console.log(json);
       } catch (err) {
         console.log("error: ", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -38,11 +41,15 @@ export default () => {
   return (
     <>
       <Heading>Search Flights</Heading>
-      <List>
-        {flights.map((flight) => {
-          return <FlightItem {...flight} key={flight.quoteID} />;
-        })}
-      </List>
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <List>
+          {flights.map((flight) => {
+            return <FlightItem {...flight} key={flight.quoteID} />;
+          })}
+        </List>
+      )}
     </>
   );
 };
