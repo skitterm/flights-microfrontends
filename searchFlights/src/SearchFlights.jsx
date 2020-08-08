@@ -4,6 +4,11 @@ import designSystem from "design/design";
 import Button from "design/Button";
 import LoadingIndicator from "./LoadingIndicator";
 import SearchResults from "./SearchResults";
+import ErrorBoundary from "./ErrorBoundary";
+
+const Heading = styled.h1`
+  font-size: ${designSystem.fontSize.display};
+`;
 
 const Form = styled.div`
   display: flex;
@@ -51,16 +56,23 @@ export default () => {
 
   return (
     <>
-      <Form>
-        <Input type="text" placeholder="Origin" onInput={onOriginInputChange} />
-        <Input
-          type="text"
-          placeholder="Destination"
-          onInput={onDestinationInputChange}
-        />
-        <Button onClick={fetchFlights}>Search</Button>
-      </Form>
-      {isLoading ? <LoadingIndicator /> : <SearchResults flights={flights} />}
+      <Heading>Search Flights</Heading>
+      <ErrorBoundary>
+        <Form>
+          <Input
+            type="text"
+            placeholder="Origin"
+            onInput={onOriginInputChange}
+          />
+          <Input
+            type="text"
+            placeholder="Destination"
+            onInput={onDestinationInputChange}
+          />
+          <Button onClick={fetchFlights}>Search</Button>
+        </Form>
+        {isLoading ? <LoadingIndicator /> : <SearchResults flights={flights} />}
+      </ErrorBoundary>
     </>
   );
 };
