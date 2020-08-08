@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import designSystem from "design/design";
-import FlightItem from "./FightItem";
 import LoadingIndicator from "./LoadingIndicator";
+import SearchResults from "./SearchResults";
 
 const Heading = styled.h1`
   font-size: ${designSystem.fontSize.display};
-`;
-
-const List = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  list-style-type: none;
-  gap: 16px;
 `;
 
 export default () => {
@@ -41,15 +34,7 @@ export default () => {
   return (
     <>
       <Heading>Search Flights</Heading>
-      {isLoading ? (
-        <LoadingIndicator />
-      ) : (
-        <List>
-          {flights.map((flight) => {
-            return <FlightItem {...flight} key={flight.quoteID} />;
-          })}
-        </List>
-      )}
+      {isLoading ? <LoadingIndicator /> : <SearchResults flights={flights} />}
     </>
   );
 };
