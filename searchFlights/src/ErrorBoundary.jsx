@@ -26,7 +26,7 @@ class ErrorBoundary extends Component {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          module: "viewFlights",
+          module: "searchFlights",
           version: 1,
         }),
       }

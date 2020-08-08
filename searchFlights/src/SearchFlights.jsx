@@ -5,10 +5,6 @@ import Button from "design/Button";
 import LoadingIndicator from "./LoadingIndicator";
 import SearchResults from "./SearchResults";
 
-const Heading = styled.h1`
-  font-size: ${designSystem.fontSize.display};
-`;
-
 const Form = styled.div`
   display: flex;
   align-items: stretch;
@@ -55,7 +51,6 @@ export default () => {
 
   return (
     <>
-      <Heading>Search Flights</Heading>
       <Form>
         <Input type="text" placeholder="Origin" onInput={onOriginInputChange} />
         <Input
