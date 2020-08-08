@@ -27,7 +27,7 @@ class ErrorBoundary extends Component {
         },
         body: JSON.stringify({
           module: "searchFlights",
-          version: 1,
+          version: 3,
         }),
       }
     );
