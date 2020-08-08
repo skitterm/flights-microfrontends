@@ -21,7 +21,7 @@ const Input = styled.input`
 
 export default () => {
   const [flights, setFlights] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [originCity, setOriginCity] = useState("");
   const [destinationCity, setDestinationCity] = useState("");
 
@@ -35,10 +35,16 @@ export default () => {
 
   const fetchFlights = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch(
-        `http://18.191.215.81:33349/searchflights?depcity=${originCity}&arrcity=${destinationCity}`
+        `http://18.191.215.81:33349/searchflights?depcity=${encodeURIComponent(
+          encodeURIComponent(originCity)
+        )}&arrcity=${encodeURIComponent(encodeURIComponent(destinationCity))}`
       );
       const json = await response.json();
+      if (!json.length) {
+        throw new Error("Unable to find results");
+      }
       setFlights(json);
     } catch (err) {
       console.log("error: ", err);
