@@ -44,7 +44,7 @@ export default (props) => {
 
   const prettifyAirport = (airportName) => {
     const pieces = airportName.split(":");
-    return pieces[3].trim();
+    return pieces[1] || airportName;
   };
 
   return (
