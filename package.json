@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/skitterm/flights-microfrontends#readme",
   "dependencies": {
-    "aws-sdk": "^2.714.1"
+    "aws-sdk": "^2.814.0"
   }
 }
